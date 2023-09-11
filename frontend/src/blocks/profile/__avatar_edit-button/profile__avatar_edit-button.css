@@ -1,0 +1,15 @@
+.profile__avatar_edit-button {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  cursor: pointer;
+  background: no-repeat url(../../../images/avatar_edit-button.svg);
+  background-position: center;
+  width: 120px;
+  height: 120px;
+  border: none;
+  border-radius: 60px;
+}

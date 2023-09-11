@@ -1,0 +1,8 @@
+.card__like {
+  padding-right: 20px;
+
+}
+
+.card__like:hover {
+  opacity: 50%;
+}

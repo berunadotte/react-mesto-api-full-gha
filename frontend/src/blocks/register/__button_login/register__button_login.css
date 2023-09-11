@@ -1,0 +1,12 @@
+.register__button_login {
+  background-color: #000;
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  margin-top: 15px;
+}
+
+.register__button_login:hover{
+  opacity: 0.6;
+  transition: 0.4s;
+}

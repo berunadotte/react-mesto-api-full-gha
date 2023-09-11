@@ -1,0 +1,19 @@
+.navbar__link_out{
+  color: #A9A9A9;
+  text-decoration: none;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  margin-left: 24px;
+
+}
+
+.navbar__link_out:visited{
+  text-decoration: none;
+  color:#A9A9A9;
+}
+
+.navbar__link_out:hover{
+  color: #fff;
+  transition: 0.4s;
+}

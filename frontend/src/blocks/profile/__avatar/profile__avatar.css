@@ -1,0 +1,25 @@
+.profile__avatar {
+  border-radius: 60px;
+  position: relative;
+  transition: 0.4s;
+
+}
+
+.profile__avatar:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.profile__avatar:hover .profile__avatar_edit-button {
+  display: block;
+  transition: 0.4s;
+
+}

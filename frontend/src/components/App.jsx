@@ -76,7 +76,7 @@ function App() {
 
   function handleCardDelete(id) {
     apiMesto
-      .removeCard(id)
+      .removeCard(id, localStorage.jwt)
       .then(() => {
         setCards((cards) => cards.filter((c) => c._id !== id))
       })
@@ -102,7 +102,7 @@ function App() {
   function handleUpdateUser(inputValues) {
     function makeRequest() {
       return apiMesto
-        .changeNameAndInfo(inputValues.name, inputValues.about)
+        .changeNameAndInfo(inputValues.name, inputValues.about, localStorage.jwt)
         .then(setCurrentUser)
     }
     handleSubmit(makeRequest)
@@ -110,14 +110,14 @@ function App() {
 
   function handleUpdateAvatar(inputValue) {
     function makeRequest() {
-      return apiMesto.updateAvatar(inputValue.avatar).then(setCurrentUser)
+      return apiMesto.updateAvatar(inputValue.avatar, localStorage.jwt).then(setCurrentUser)
     }
     handleSubmit(makeRequest)
   }
 
   function handleAddPlaceSubmit(inputValues) {
     function makeRequest() {
-      return apiMesto.addNewCardToServer(inputValues).then((newCard) => {
+      return apiMesto.addNewCardToServer(inputValues, localStorage.jwt).then((newCard) => {
         setCards([newCard, ...cards])
       })
     }
@@ -125,10 +125,10 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id)
+    const isLiked = card.likes.some((i) => i === currentUser._id)
 
     apiMesto
-      .changeLikeCardStatus(card._id, isLiked)
+      .changeLikeCardStatus(card._id, isLiked, localStorage.jwt)
       .then((newCard) => {
         setCards((cards) =>
           cards.map((c) => (c._id === card._id ? newCard : c))
@@ -140,12 +140,12 @@ function App() {
   }
 
   React.useEffect(() => {
-    checkToken()
+    checkToken(localStorage.jwt)
   }, [])
 
   React.useEffect(() => {
     if (loggedIn) {
-      Promise.all([apiMesto.loadNameAndInfo(), apiMesto.getInitialCards()])
+      Promise.all([apiMesto.loadNameAndInfo(localStorage.jwt), apiMesto.getInitialCards(localStorage.jwt)])
         .then((data) => {
           setCurrentUser(data[0])
           setCards(data[1])
@@ -156,15 +156,14 @@ function App() {
     }
   }, [loggedIn])
 
-  function checkToken() {
-    const jwt = localStorage.getItem('jwt')
+  function checkToken(jwt) {
     if (jwt) {
       authApi
         .checkToken(jwt)
         .then((res) => {
           if (res) {
             setLoggedIn(true)
-            setEmail(res.data.email)
+            setEmail(res.email)
             navigate('/')
           }
         })

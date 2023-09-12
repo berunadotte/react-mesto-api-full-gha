@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 51.250.107.240
 
-Frontend https://...
+Frontend http://mesto.berunadotte.nomoredomainsicu.ru/
 
-Backend https://...
+Backend http://api.mesto.berunadotte.nomoredomainsicu.ru/

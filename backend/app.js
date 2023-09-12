@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { celebrate, Joi, errors } = require('celebrate');
@@ -7,6 +8,13 @@ const cardRouter = require('./routes/cards');
 const NotFoundError = require('./middlewares/errors/notFoundError');
 const auth = require('./middlewares/auth');
 const { login, createUser } = require('./controllers/users');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+const rateLimit = require('express-rate-limit');
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+});
 
 const { PORT = 3000, DB_CONN = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 
@@ -18,6 +26,10 @@ mongoose.connect(DB_CONN);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(requestLogger);
+
+app.use(limiter);
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -44,6 +56,8 @@ app.use('*', (req, res, next) => {
   next(new NotFoundError('Страницы по указанному адресу не существует.'));
 });
 
+app.use(errorLogger);
+
 app.use(errors());
 
 app.use((err, req, res, next) => {
@@ -55,6 +69,4 @@ app.use((err, req, res, next) => {
   next();
 });
 
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-});
+app.listen(PORT);

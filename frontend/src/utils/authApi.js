@@ -1,4 +1,4 @@
-export const baseUrl = 'api.mesto.berunadotte.nomoredomainsicu.ru'
+export const baseUrl = 'https://api.mesto.berunadotte.nomoredomainsicu.ru'
 
 function checkResponse(res) {
   if (res.ok) {

@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP 51.250.107.240
+IP 158.160.71.217
 
 Frontend http://mesto.berunadotte.nomoredomainsicu.ru/
 

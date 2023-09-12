@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
+const { linkRegex } = require('../utils/constants');
 
 const AuthorizationError = require('../middlewares/errors/authorizationError');
 
@@ -22,7 +23,7 @@ const userSchema = new mongoose.Schema({
     default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
     validate: {
       validator: (url) => {
-        const urlPattern = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+        const urlPattern = linkRegex;
         return urlPattern.test(url);
       },
       message: 'Не правильная ссылка на аватар.',

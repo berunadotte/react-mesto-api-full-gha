@@ -17,7 +17,7 @@ const getAllUsers = (req, res, next) => {
 
 const getСurrentUser = (req, res, next) => {
   User.findById(req.user._id)
-    .then((user) => res.status(200).send(user))
+    .then((user) => res.send(user))
     .catch(next);
 };
 

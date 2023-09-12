@@ -1,4 +1,4 @@
-export const baseUrl = 'http://localhost:3000'
+export const baseUrl = 'api.mesto.berunadotte.nomoredomainsicu.ru'
 
 function checkResponse(res) {
   if (res.ok) {

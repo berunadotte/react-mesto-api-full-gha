@@ -112,5 +112,5 @@ class Api {
 }
 
 export const apiMesto = new Api({
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'api.mesto.berunadotte.nomoredomainsicu.ru',
 })
